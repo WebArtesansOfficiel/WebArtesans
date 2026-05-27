@@ -3,275 +3,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebArtesan | Création de Sites Web sur Mesure</title>
-    <!-- Lien vers une police moderne (depuis Google Fonts) -->
+    <title>WebArtesans | Création artisanale de sites web</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Styles CSS de base intégrés directement pour la simplicité --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0a0b;
+            --surface: #141416;
+            --surface2: #1a1a1d;
+            --border: #2a2a2e;
+            --text: #e4e4e7;
+            --text2: #a1a1aa;
+            --accent: #f59e0b;
+            --glow: #06b6d4;
+            --glow-dim: rgba(6, 182, 212, 0.15);
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
-        /* En-tête et navigation */
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+        h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); letter-spacing: -0.03em; }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); letter-spacing: -0.02em; }
+
+        /* Header */
         header {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             padding: 20px 0;
+            background-color: rgba(10,10,11,0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-
         nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #2c3e50;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: #e67e22; /* Une touche de couleur "artisanale" */
-        }
-
-        .btn-contact {
-            background-color: #2c3e50;
-            color: #fff;
-            padding: 10px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-contact:hover {
-            background-color: #e67e22;
-        }
-
-        /* Section Héros (la bannière principale) */
-        .hero {
-            padding: 80px 0;
-            text-align: center;
-            background: linear-gradient(135deg, #f9f9f9 0%, #e8f0f2 100%);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: #555;
-        }
-
-        .btn-primary {
-            background-color: #e67e22;
-            color: #fff;
-            padding: 15px 35px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: inline-block;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3);
-        }
-
-        /* Section Services */
-        .services {
-            padding: 80px 0;
-            background-color: #fff;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            color: #2c3e50;
-            margin-bottom: 50px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background-color: #f9f9f9;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid #eee;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .service-card:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .service-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .service-card h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        /* Section Approche / Valeurs */
-        .values {
-            padding: 80px 0;
-            background-color: #f9f9f9;
-        }
-
-        .values-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
-
-        .values-text {
-            flex: 1;
-        }
-
-        .values-text h2 {
-            font-size: 2rem;
-            color: #2c3e50;
-        }
-
-        .values-image {
-            flex: 1;
-            background-color: #e8f0f2;
-            height: 300px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            color: #555;
-            font-size: 1.2rem;
+            align-items: center;
+            position: relative;
+        }
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+        .logo span {
+            background: linear-gradient(135deg, var(--accent), #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* Pied de page */
-        footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
+        /* Tooltip "Accueil" */
+        .logo::after {
+            content: 'Accueil';
+            position: absolute;
+            bottom: -28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background-color: var(--surface2);
+            color: var(--text2);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .logo:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Bouton contact repositionné */
+        .nav-links {
+            position: absolute;
+            right: 0;
+        }
+        .nav-cta {
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+        .nav-cta:hover {
+            border-color: var(--glow);
+            box-shadow: 0 0 20px var(--glow-dim);
+            color: var(--glow);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0 40px;
             text-align: center;
-            padding: 20px 0;
-            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--text2);
+            max-width: 600px;
+            margin: 20px auto 0;
+            font-weight: 400;
         }
 
-        /* Responsive pour mobiles */
+        /* Cartes cyber */
+        .cyber-cards {
+            padding: 40px 0 80px;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 28px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cyber-card {
+            position: relative;
+            background-color: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        .cyber-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--glow);
+            box-shadow: 
+                0 0 30px var(--glow-dim),
+                0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid var(--glow);
+            border-left: 2px solid var(--glow);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .cyber-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid var(--accent);
+            border-right: 2px solid var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .cyber-card:hover::before,
+        .cyber-card:hover::after {
+            opacity: 1;
+        }
+
+        .cyber-card .bg-lines {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(135deg, transparent 48%, rgba(6,182,212,0.03) 48%, rgba(6,182,212,0.03) 52%, transparent 52%),
+                linear-gradient(225deg, transparent 48%, rgba(245,158,11,0.02) 48%, rgba(245,158,11,0.02) 52%, transparent 52%);
+            background-size: 60px 60px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .cyber-card:hover .bg-lines {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .cyber-card:hover .card-icon {
+            transform: scale(1.1);
+        }
+        .card-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--glow);
+            margin-bottom: 8px;
+        }
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text2);
+            margin-bottom: 24px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .btn-glow {
+            background: linear-gradient(135deg, var(--glow), #0891b2);
+            color: #fff;
+            box-shadow: 0 0 20px var(--glow-dim);
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 40px rgba(6,182,212,0.4);
+        }
+        .btn-black {
+            background-color: #0a0a0b;
+            color: #fff;
+            border: 1px solid #333;
+        }
+        .btn-black:hover {
+            background-color: #000;
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Section Qui sommes-nous */
+        .about {
+            padding: 80px 0 100px;
+            background-color: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .about h2 {
+            text-align: center;
+            color: var(--text);
+            margin-bottom: 32px;
+        }
+        .about-placeholder {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px;
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            text-align: center;
+            color: var(--text2);
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+        .about-placeholder:hover {
+            border-color: #444;
+        }
+        .about-placeholder .picto {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 24px 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            margin-top: auto;
+        }
+
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
+            .cards-grid {
+                grid-template-columns: 1fr;
             }
-            .values-content {
-                flex-direction: column;
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding: 50px 0 20px; }
+            nav { flex-direction: column; gap: 10px; }
+            .nav-links {
+                position: static;
             }
-            .values-image {
-                width: 100%;
+            .cyber-card {
+                padding: 28px 20px;
+            }
+            .card-title {
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. En-tête avec logo et bouton contact -->
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">Web<span>Artesan</span></a>
-                <a href="mailto:contact@webartesan.fr" class="btn-contact">Me Contacter</a>
+                <a href="index.html" class="logo">&lt;<span>WebArtesans</span>/&gt;</a>
+                <div class="nav-links">
+                    <a href="mailto:tristan@webartesan.fr" class="nav-cta">Contact</a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- 2. Section Héros : accroche principale -->
+    <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <h1>Votre site web unique,<br>façonné avec passion</h1>
-            <p>Je crée des sites internet sur-mesure, élégants et performants pour donner vie à votre projet. De l'idée à la mise en ligne, un accompagnement artisanal.</p>
-            <a href="#contact" class="btn-primary">Parlons de votre projet</a>
+            <h1>Un site web artisanal.<br>Du code. De l'humain. Rien d'autre.</h1>
+            <p class="subtitle">Je conçois et développe des sites sur mesure pour les indépendants qui veulent du solide, pas du jetable.</p>
         </div>
     </section>
 
-    <!-- 3. Section Services : ce que tu proposes -->
-    <section class="services" id="services">
+    <!-- Deux cartes cyber -->
+    <section class="cyber-cards">
         <div class="container">
-            <h2 class="section-title">Ce que je peux faire pour vous</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🎨</div>
-                    <h3>Design & Création</h3>
-                    <p>Des maquettes uniques qui reflètent votre identité. Votre site ne ressemblera à aucun autre.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💻</div>
-                    <h3>Développement</h3>
-                    <p>Un code propre, rapide et responsive. Votre site sera parfait sur ordinateur, tablette et mobile.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🚀</div>
-                    <h3>Référencement & Performance</h3>
-                    <p>Les bonnes pratiques SEO dès le départ et des temps de chargement optimisés pour vos visiteurs.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔧</div>
-                    <h3>Maintenance & Suivi</h3>
-                    <p>Un site, ça vit ! Je peux le faire évoluer et assurer sa maintenance pour qu'il reste au top.</p>
-                </div>
+            <div class="cards-grid">
+
+                <!-- Carte 1 : Prestations -->
+                <a href="presta.html" class="cyber-card">
+                    <div class="bg-lines"></div>
+                    <div class="card-content">
+                        <span class="card-label">│ SITE WEB</span>
+                        <span class="card-icon">&#9878;</span>
+                        <h2 class="card-title">Voir mes<br>prestations</h2>
+                        <p class="card-desc">Landing page, site vitrine, outil métier. Découvrez mes formules et mes tarifs transparents.</p>
+                        <span class="card-btn btn-black">Explorer →</span>
+                    </div>
+                </a>
+
+                <!-- Carte 2 : Contact -->
+                <a href="mailto:tristan@webartesan.fr" class="cyber-card">
+                    <div class="bg-lines"></div>
+                    <div class="card-content">
+                        <span class="card-label">│ PROJET</span>
+                        <span class="card-icon">&#128172;</span>
+                        <h2 class="card-title">Parlons de votre<br>projet</h2>
+                        <p class="card-desc">Un devis en 24h, une réponse rapide. Écrivez-moi directement, sans formulaire compliqué.</p>
+                        <span class="card-btn btn-glow">Me contacter →</span>
+                    </div>
+                </a>
+
             </div>
         </div>
     </section>
 
-    <!-- 4. Section Valeurs : pourquoi "Artesan" -->
-    <section class="values" id="about">
+    <!-- Qui sommes-nous -->
+    <section class="about" id="about">
         <div class="container">
-            <div class="values-content">
-                <div class="values-text">
-                    <h2>L'esprit WebArtesan</h2>
-                    <p>Je crois en un web fait main, loin des sites génériques. Chaque projet est une nouvelle aventure où j'allie <strong>créativité</strong> et <strong>technique</strong> pour vous offrir un outil sur-mesure.</p>
-                    <p>En tant que créateur et développeur, je gère votre projet de A à Z : de la première esquisse à la mise en ligne finale. La communication est directe et transparente.</p>
-                </div>
-                <div class="values-image">
-                    [Ici, une photo de toi ou de ton espace de travail]
-                </div>
+            <h2>Qui sommes-nous ?</h2>
+            <div class="about-placeholder">
+                <span class="picto">&#128221;</span>
+                <p>Espace réservé — Ajoutez ici votre texte de présentation.</p>
             </div>
         </div>
     </section>
 
-    <!-- 5. Pied de page -->
     <footer>
         <div class="container">
-            <p>© 2024 WebArtesan - Fait avec ❤️ et beaucoup de ☕️</p>
+            <p>&lt;/&gt; WebArtesans — Fait main, pensé humain.</p>
         </div>
     </footer>
 

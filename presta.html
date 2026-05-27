@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestations | WebArtesans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0a0b;
+            --surface: #141416;
+            --surface2: #1a1a1d;
+            --border: #2a2a2e;
+            --text: #e4e4e7;
+            --text2: #a1a1aa;
+            --accent: #f59e0b;
+            --glow: #06b6d4;
+            --glow-dim: rgba(6, 182, 212, 0.15);
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+        h1 { font-size: clamp(2rem, 5vw, 2.8rem); letter-spacing: -0.03em; }
+        h2 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 1.5rem; }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            background-color: rgba(10,10,11,0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+        .logo span {
+            background: linear-gradient(135deg, var(--accent), #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logo::after {
+            content: 'Accueil';
+            position: absolute;
+            bottom: -28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background-color: var(--surface2);
+            color: var(--text2);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .logo:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .nav-links {
+            position: absolute;
+            right: 0;
+        }
+        .nav-cta {
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+        .nav-cta:hover {
+            border-color: var(--glow);
+            box-shadow: 0 0 20px var(--glow-dim);
+            color: var(--glow);
+        }
+
+        /* Hero de page */
+        .page-hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(6,182,212,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .page-hero p {
+            max-width: 550px;
+            margin: 16px auto 0;
+            font-size: 1.05rem;
+            color: var(--text2);
+        }
+
+        /* ========== SECTION PRESTATION STYLE 1 : Création de site sur mesure ========== */
+        .presta-section {
+            padding: 80px 0;
+        }
+        .presta-section.alt {
+            background-color: var(--surface);
+        }
+        .presta-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--glow);
+            margin-bottom: 12px;
+            display: block;
+        }
+        .presta-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .presta-header-text {
+            flex: 1;
+        }
+        .presta-header-text h2 {
+            margin-bottom: 8px;
+        }
+        .presta-header-text p {
+            color: var(--text2);
+            font-size: 1rem;
+        }
+        .presta-prix {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+        .presta-prix small {
+            font-size: 0.8rem;
+            color: var(--text2);
+            display: block;
+        }
+
+        /* Grille de fonctionnalités façon "carte éclatée" */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+        }
+        .feature-tag {
+            background-color: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .feature-tag:hover {
+            border-color: var(--glow);
+            box-shadow: 0 0 15px var(--glow-dim);
+            transform: translateY(-2px);
+        }
+        .feature-tag .icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .feature-tag .label {
+            font-size: 0.8rem;
+            color: var(--text2);
+            font-weight: 500;
+        }
+
+        /* ========== SECTION PRESTATION STYLE 2 : Formation IA ========== */
+        .presta-card-large {
+            background-color: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .presta-card-large:hover {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.1);
+        }
+        .presta-card-large .card-inner {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .presta-card-large .card-visual {
+            font-size: 5rem;
+            flex-shrink: 0;
+        }
+        .presta-card-large .card-info {
+            flex: 1;
+        }
+        .presta-card-large .card-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+        .presta-card-large .card-info p {
+            color: var(--text2);
+            margin-bottom: 16px;
+        }
+        .presta-card-large .card-info .prix {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #8b5cf6;
+        }
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .tag-list .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text2);
+        }
+
+        /* ========== SECTION PRESTATION STYLE 3 : Logiciel ========== */
+        .presta-card-vertical {
+            background-color: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .presta-card-vertical:hover {
+            border-color: #10b981;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.1);
+            transform: translateY(-4px);
+        }
+        .presta-card-vertical .icon-xl {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 16px;
+        }
+        .presta-card-vertical h3 {
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+        }
+        .presta-card-vertical .desc {
+            font-size: 0.9rem;
+            color: var(--text2);
+            margin-bottom: 16px;
+        }
+        .presta-card-vertical .prix {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 16px;
+        }
+        .spec-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            display: inline-block;
+        }
+        .spec-list li {
+            padding: 4px 0;
+            font-size: 0.85rem;
+            color: var(--text2);
+        }
+        .spec-list li::before {
+            content: '▹ ';
+            color: #10b981;
+        }
+
+        /* ========== SECTION PRESTATION STYLE 4 : Landing page ========== */
+        .presta-split {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .presta-split .split-visual {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        .presta-split .split-visual:hover {
+            border-color: var(--glow);
+            box-shadow: 0 0 30px var(--glow-dim);
+        }
+        .presta-split .split-info {
+            flex: 1.5;
+            min-width: 280px;
+            background-color: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .presta-split .split-info:hover {
+            border-color: var(--glow);
+        }
+        .presta-split .split-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        .presta-split .split-info p {
+            font-size: 0.9rem;
+            color: var(--text2);
+            margin-bottom: 16px;
+        }
+        .presta-split .split-info .prix {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* ========== SECTION PRESTATION STYLE 5 : Maintenance ========== */
+        .presta-minimal {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            background-color: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 32px;
+            transition: all 0.3s ease;
+        }
+        .presta-minimal:hover {
+            border-color: #ef4444;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.08);
+        }
+        .presta-minimal .minimal-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+        .presta-minimal .minimal-info {
+            flex: 1;
+        }
+        .presta-minimal .minimal-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+        .presta-minimal .minimal-info p {
+            font-size: 0.85rem;
+            color: var(--text2);
+            margin: 0;
+        }
+        .presta-minimal .minimal-prix {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ef4444;
+            white-space: nowrap;
+        }
+
+        /* CTA Final */
+        .cta-final {
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--glow), #0891b2);
+            color: #fff;
+            padding: 16px 40px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px var(--glow-dim);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 50px rgba(6,182,212,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 24px 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        @media (max-width: 600px) {
+            nav { flex-direction: column; gap: 10px; }
+            .nav-links { position: static; }
+            .presta-card-large .card-inner { flex-direction: column; text-align: center; }
+            .presta-split { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">&lt;<span>WebArtesans</span>/&gt;</a>
+                <div class="nav-links">
+                    <a href="mailto:tristan@webartesan.fr" class="nav-cta">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Mes prestations</h1>
+            <p>Du site vitrine à la maintenance, en passant par la formation IA. Voici tout ce que je peux faire pour vous.</p>
+        </div>
+    </section>
+
+    <!-- 1. CRÉATION DE SITE SUR MESURE -->
+    <section class="presta-section">
+        <div class="container">
+            <span class="presta-badge">│ SERVICE PHARE</span>
+            <div class="presta-header">
+                <div class="presta-header-text">
+                    <h2>Création de site sur mesure</h2>
+                    <p>Un site unique, taillé pour votre activité. Design, développement, mise en ligne : je gère tout de A à Z.</p>
+                </div>
+                <div class="presta-prix">À partir de 800 € <small>HT</small></div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-tag">
+                    <span class="icon">&#127968;</span>
+                    <span class="label">Site vitrine</span>
+                </div>
+                <div class="feature-tag">
+                    <span class="icon">&#128640;</span>
+                    <span class="label">Landing page</span>
+                </div>
+                <div class="feature-tag">
+                    <span class="icon">&#128736;</span>
+                    <span class="label">Outil métier</span>
+                </div>
+                <div class="feature-tag">
+                    <span class="icon">&#128241;</span>
+                    <span class="label">Responsive</span>
+                </div>
+                <div class="feature-tag">
+                    <span class="icon">&#128269;</span>
+                    <span class="label">SEO optimisé</span>
+                </div>
+                <div class="feature-tag">
+                    <span class="icon">&#128295;</span>
+                    <span class="label">Code livré</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. FORMATION IA -->
+    <section class="presta-section alt">
+        <div class="container">
+            <span class="presta-badge">│ FORMATION</span>
+            <div class="presta-card-large">
+                <div class="card-inner">
+                    <div class="card-visual">&#129504;</div>
+                    <div class="card-info">
+                        <h3>Formation IA</h3>
+                        <p>Apprenez à utiliser l'intelligence artificielle pour booster votre activité. Coaching personnalisé en visio, adapté à votre niveau et vos objectifs.</p>
+                        <div class="prix">80 € <small style="font-size:0.7rem;color:var(--text2);">/ séance de 2h</small></div>
+                        <div class="tag-list">
+                            <span class="tag">ChatGPT</span>
+                            <span class="tag">Prompt engineering</span>
+                            <span class="tag">Automatisation</span>
+                            <span class="tag">Visio</span>
+                            <span class="tag">Débutant bienvenu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. LOGICIEL -->
+    <section class="presta-section">
+        <div class="container">
+            <span class="presta-badge">│ DÉVELOPPEMENT</span>
+            <div class="presta-card-vertical">
+                <span class="icon-xl">&#128187;</span>
+                <h3>Logiciel sur mesure</h3>
+                <p class="desc">Un outil qui correspond exactement à vos besoins métier. Dashboard, gestion clients, facturation, planning : vous rêvez, je code.</p>
+                <div class="prix">À partir de 2 500 € <small style="font-size:0.7rem;color:var(--text2);">HT</small></div>
+                <ul class="spec-list">
+                    <li>Analyse de vos besoins</li>
+                    <li>Maquettage UX/UI</li>
+                    <li>Développement full stack</li>
+                    <li>Tests et déploiement</li>
+                    <li>Formation à l'outil</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. LANDING PAGE -->
+    <section class="presta-section alt">
+        <div class="container">
+            <span class="presta-badge">│ ACQUISITION</span>
+            <div class="presta-split">
+                <div class="split-visual">&#127912;</div>
+                <div class="split-info">
+                    <h3>Création de landing page</h3>
+                    <p>Une page unique, optimisée pour convertir vos visiteurs en clients. Design percutant, chargement rapide, message clair.</p>
+                    <div class="prix">300 € <small style="font-size:0.7rem;color:var(--text2);">HT</small></div>
+                    <div class="tag-list">
+                        <span class="tag">Design unique</span>
+                        <span class="tag">Responsive</span>
+                        <span class="tag">Formulaire</span>
+                        <span class="tag">SEO</span>
+                        <span class="tag">Livraison 5 jours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. MAINTENANCE -->
+    <section class="presta-section">
+        <div class="container">
+            <span class="presta-badge">│ SUIVI</span>
+            <h2 style="margin-bottom:24px;">Maintenance & Suivi</h2>
+            <div class="presta-minimal">
+                <span class="minimal-icon">&#128260;</span>
+                <div class="minimal-info">
+                    <h3>Forfait annuel</h3>
+                    <p>Mises à jour, sauvegardes, petits ajustements. Votre site reste au top toute l'année.</p>
+                </div>
+                <div class="minimal-prix">70 € <small style="font-size:0.6rem;color:var(--text2);">/an</small></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>Un projet en tête ?</h2>
+            <p style="color:var(--text2); margin-bottom:24px;">Chaque besoin est unique. Parlons-en, je vous réponds rapidement.</p>
+            <a href="mailto:tristan@webartesan.fr" class="btn-primary">Me contacter</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&lt;/&gt; WebArtesans — Fait main, pensé humain.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
